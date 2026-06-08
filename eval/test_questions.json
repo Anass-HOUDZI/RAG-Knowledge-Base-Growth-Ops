@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "question": "Comment configurer le lead scoring dans HubSpot ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["scoring", "MQL", "point"],
+    "category": "hubspot"
+  },
+  {
+    "id": 2,
+    "question": "Quel est le revenue mensuel par canal en 2025 ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["revenue", "canal"],
+    "category": "kpi"
+  },
+  {
+    "id": 3,
+    "question": "Quelles sont les étapes de la séquence d'onboarding ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["onboarding", "étape"],
+    "category": "playbook"
+  },
+  {
+    "id": 4,
+    "question": "Combien de partenaires actifs avons-nous par région ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["partenaire", "région"],
+    "category": "kpi"
+  },
+  {
+    "id": 5,
+    "question": "Comment prévenir le churn client ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["churn", "prévention"],
+    "category": "playbook"
+  },
+  {
+    "id": 6,
+    "question": "Quelle est la rétention de la cohorte 2025-01 ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["rétention", "cohorte"],
+    "category": "kpi"
+  },
+  {
+    "id": 7,
+    "question": "Comment fonctionne le processus de handoff Marketing vers Sales ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["handoff", "marketing", "sales"],
+    "category": "playbook"
+  },
+  {
+    "id": 8,
+    "question": "Quel est le taux de conversion du funnel par étape ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["conversion", "funnel"],
+    "category": "kpi"
+  },
+  {
+    "id": 9,
+    "question": "Quelles sont les bonnes pratiques de nurturing email ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["nurturing", "email"],
+    "category": "playbook"
+  },
+  {
+    "id": 10,
+    "question": "Combien de nouveaux utilisateurs par mois en 2026 ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["utilisateur", "nouveau"],
+    "category": "kpi"
+  },
+  {
+    "id": 11,
+    "question": "Comment définir un Product Qualified Lead (PQL) ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["PQL", "product"],
+    "category": "playbook"
+  },
+  {
+    "id": 12,
+    "question": "Quel est le total des commandes par statut de partenaire ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["commande", "statut"],
+    "category": "kpi"
+  },
+  {
+    "id": 13,
+    "question": "Comment configurer un workflow HubSpot d'automatisation ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["workflow", "automatisation"],
+    "category": "hubspot"
+  },
+  {
+    "id": 14,
+    "question": "Quel canal génère le plus de revenue ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["canal", "revenue"],
+    "category": "kpi"
+  },
+  {
+    "id": 15,
+    "question": "Comment calculer le Customer Health Score ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["health", "score"],
+    "category": "playbook"
+  },
+  {
+    "id": 16,
+    "question": "Quelle est l'évolution du growth accounting sur 2025 ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["growth", "accounting"],
+    "category": "kpi"
+  },
+  {
+    "id": 17,
+    "question": "Quelles sont les règles de segmentation client ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["segmentation", "règle"],
+    "category": "playbook"
+  },
+  {
+    "id": 18,
+    "question": "Quel est le nombre de signups par jour cette semaine ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["signup"],
+    "category": "kpi"
+  },
+  {
+    "id": 19,
+    "question": "Comment mettre en place une stratégie ABM ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["ABM", "account"],
+    "category": "playbook"
+  },
+  {
+    "id": 20,
+    "question": "Quel est le top 10 des partenaires par revenue ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["partenaire", "revenue"],
+    "category": "kpi"
+  },
+  {
+    "id": 21,
+    "question": "Comment fonctionne le programme de parrainage ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["parrainage", "referral"],
+    "category": "playbook"
+  },
+  {
+    "id": 22,
+    "question": "Quelles colonnes sont disponibles dans le modèle mart_funnel_daily ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["mart_funnel", "colonne"],
+    "category": "dbt"
+  },
+  {
+    "id": 23,
+    "question": "Comment configurer les lifecycle stages dans HubSpot ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["lifecycle", "stage"],
+    "category": "hubspot"
+  },
+  {
+    "id": 24,
+    "question": "Quelle est la moyenne de revenue par partenaire actif ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["revenue", "partenaire"],
+    "category": "kpi"
+  },
+  {
+    "id": 25,
+    "question": "Quels sont les standards de workflows HubSpot ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["workflow", "standard"],
+    "category": "hubspot"
+  },
+  {
+    "id": 26,
+    "question": "Quel est le churn rate par cohorte mensuelle ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["churn", "cohorte"],
+    "category": "kpi"
+  },
+  {
+    "id": 27,
+    "question": "Comment optimiser la conversion trial vers paid ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["trial", "paid", "conversion"],
+    "category": "playbook"
+  },
+  {
+    "id": 28,
+    "question": "Combien de nouveaux clients par canal en 2025 ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["client", "canal"],
+    "category": "kpi"
+  },
+  {
+    "id": 29,
+    "question": "Comment mettre en place un plan de tracking événements produit ?",
+    "expected_route": "docs",
+    "expected_answer_contains": ["tracking", "événement"],
+    "category": "playbook"
+  },
+  {
+    "id": 30,
+    "question": "Quelle est la tendance du nombre total de partenaires inscrits par trimestre ?",
+    "expected_route": "data",
+    "expected_answer_contains": ["partenaire", "trimestre"],
+    "category": "kpi"
+  }
+]

@@ -1,0 +1,733 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v11/manifest.json",
+    "dbt_version": "1.8.4",
+    "generated_at": "2026-06-08T14:00:00.000000Z",
+    "invocation_id": "a3f8c2d1-7b4e-4f9a-b6c3-2e1d0f8a5b7c",
+    "env": {},
+    "project_name": "growth_analytics",
+    "project_id": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+    "user_id": null,
+    "send_anonymous_usage_stats": false,
+    "adapter_type": "bigquery"
+  },
+  "nodes": {
+    "model.growth_analytics.mart_partner_360": {
+      "database": "growth_analytics",
+      "schema": "marts",
+      "name": "mart_partner_360",
+      "resource_type": "model",
+      "package_name": "growth_analytics",
+      "path": "marts/mart_partner_360.sql",
+      "original_file_path": "models/marts/mart_partner_360.sql",
+      "unique_id": "model.growth_analytics.mart_partner_360",
+      "fqn": ["growth_analytics", "marts", "mart_partner_360"],
+      "alias": "mart_partner_360",
+      "checksum": {
+        "name": "sha256",
+        "checksum": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "marts",
+        "database": "growth_analytics",
+        "tags": ["growth", "partner", "360"],
+        "meta": {
+          "owner": "growth-ops",
+          "team": "data",
+          "sla": "daily",
+          "pii": false
+        },
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "persist_docs": {
+          "relation": true,
+          "columns": true
+        },
+        "full_refresh": null,
+        "on_schema_change": "append_new_columns",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": "#4CAF50"
+        },
+        "contract": {
+          "enforced": false
+        }
+      },
+      "tags": ["growth", "partner", "360"],
+      "description": "Vue consolidée à 360° de chaque partenaire de ScaleUp Corp. Ce modèle agrège les informations clés de chaque partenaire en une seule ligne par identifiant unique, incluant la région géographique d'appartenance, le statut actuel du partenariat (actif, churné ou en période d'essai), la date d'inscription initiale, ainsi que les métriques cumulées de commandes et de chiffre d'affaires total généré. Cette table sert de référence principale pour les analyses de segmentation partenaire, les dashboards de suivi de la base installée et les rapports de performance commerciale par région. Elle est alimentée quotidiennement à partir des tables staging des systèmes CRM et de facturation.",
+      "columns": {
+        "partner_id": {
+          "name": "partner_id",
+          "description": "Identifiant unique du partenaire, généré par le système CRM lors de la création du compte partenaire. Clé primaire de la table.",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["primary_key"]
+        },
+        "region": {
+          "name": "region",
+          "description": "Région géographique à laquelle le partenaire est rattaché. Valeurs possibles : 'france_north', 'france_south', 'benelux', 'dach', 'southern_europe'. Utilisé pour le reporting par territoire commercial et l'assignation des account managers.",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension"]
+        },
+        "status": {
+          "name": "status",
+          "description": "Statut actuel du partenariat. Trois valeurs possibles : 'active' (partenaire en activité avec au moins une commande dans les 90 derniers jours), 'churned' (partenaire ayant résilié ou sans activité depuis plus de 90 jours), 'trial' (partenaire en période d'essai, pas encore converti en partenaire actif).",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "status"]
+        },
+        "signup_date": {
+          "name": "signup_date",
+          "description": "Date à laquelle le partenaire a créé son compte sur la plateforme ScaleUp Corp. Format ISO 8601 (YYYY-MM-DD). Cette date est immuable et sert de référence pour le calcul de l'ancienneté et l'analyse de cohortes.",
+          "meta": {},
+          "data_type": "DATE",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "date"]
+        },
+        "total_orders": {
+          "name": "total_orders",
+          "description": "Nombre total cumulé de commandes passées par le partenaire depuis son inscription. Inclut les commandes de tous statuts (livrées, en cours, annulées). Métrique clé pour évaluer le volume d'activité du partenaire.",
+          "meta": {},
+          "data_type": "INTEGER",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric"]
+        },
+        "total_revenue": {
+          "name": "total_revenue",
+          "description": "Chiffre d'affaires total cumulé généré par le partenaire en euros (€), hors taxes. Calculé à partir des commandes au statut 'livrée' uniquement. Arrondi à deux décimales. Métrique principale pour le scoring partenaire et la classification en tiers (silver, gold, platinum).",
+          "meta": {},
+          "data_type": "DECIMAL",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "revenue"]
+        }
+      },
+      "meta": {
+        "owner": "growth-ops",
+        "team": "data",
+        "sla": "daily",
+        "pii": false
+      },
+      "group": null,
+      "docs": {
+        "show": true,
+        "node_color": "#4CAF50"
+      },
+      "patch_path": "growth_analytics://models/marts/schema.yml",
+      "build_path": null,
+      "deferred": false,
+      "unrendered_config": {
+        "materialized": "table",
+        "schema": "marts"
+      },
+      "created_at": 1717848000.0,
+      "relation_name": "`growth_analytics`.`marts`.`mart_partner_360`",
+      "raw_code": "SELECT\n  partner_id,\n  region,\n  status,\n  signup_date,\n  total_orders,\n  total_revenue\nFROM {{ ref('stg_partners') }}\nLEFT JOIN {{ ref('stg_orders_agg') }} USING (partner_id)",
+      "language": "sql",
+      "refs": [
+        {"name": "stg_partners", "package": null, "version": null},
+        {"name": "stg_orders_agg", "package": null, "version": null}
+      ],
+      "sources": [],
+      "metrics": [],
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.growth_analytics.stg_partners",
+          "model.growth_analytics.stg_orders_agg"
+        ]
+      },
+      "compiled_path": "target/compiled/growth_analytics/models/marts/mart_partner_360.sql",
+      "contract": {
+        "enforced": false,
+        "alias_types": true,
+        "checksum": null
+      },
+      "access": "public",
+      "constraints": [],
+      "version": null,
+      "latest_version": null,
+      "deprecation_date": null
+    },
+    "model.growth_analytics.mart_funnel_daily": {
+      "database": "growth_analytics",
+      "schema": "marts",
+      "name": "mart_funnel_daily",
+      "resource_type": "model",
+      "package_name": "growth_analytics",
+      "path": "marts/mart_funnel_daily.sql",
+      "original_file_path": "models/marts/mart_funnel_daily.sql",
+      "unique_id": "model.growth_analytics.mart_funnel_daily",
+      "fqn": ["growth_analytics", "marts", "mart_funnel_daily"],
+      "alias": "mart_funnel_daily",
+      "checksum": {
+        "name": "sha256",
+        "checksum": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3"
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "marts",
+        "database": "growth_analytics",
+        "tags": ["growth", "funnel", "daily"],
+        "meta": {
+          "owner": "growth-ops",
+          "team": "data",
+          "sla": "daily",
+          "pii": false
+        },
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "persist_docs": {
+          "relation": true,
+          "columns": true
+        },
+        "full_refresh": null,
+        "on_schema_change": "append_new_columns",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": "#2196F3"
+        },
+        "contract": {
+          "enforced": false
+        }
+      },
+      "tags": ["growth", "funnel", "daily"],
+      "description": "Suivi quotidien du funnel de conversion de ScaleUp Corp. Chaque ligne représente une combinaison unique de date et d'étape du funnel (visite, inscription, activation, achat). Ce modèle permet de suivre jour par jour le nombre d'utilisateurs à chaque étape du parcours de conversion et le taux de conversion associé. Il est utilisé pour alimenter le dashboard de performance Growth, détecter les baisses de conversion en temps réel et analyser les tendances saisonnières. Les données sont agrégées à partir des événements tracking et des tables staging utilisateurs.",
+      "columns": {
+        "date": {
+          "name": "date",
+          "description": "Date du jour pour lequel les métriques du funnel sont calculées. Format ISO 8601 (YYYY-MM-DD). Granularité quotidienne. Fait partie de la clé composite avec la colonne 'step'.",
+          "meta": {},
+          "data_type": "DATE",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "date"]
+        },
+        "step": {
+          "name": "step",
+          "description": "Étape du funnel de conversion. Quatre valeurs ordonnées possibles : 'visit' (visite sur le site web ou l'application), 'signup' (création d'un compte utilisateur), 'activation' (réalisation de l'action clé d'activation définie par le produit), 'purchase' (premier achat ou souscription payante). L'ordre des étapes reflète la progression naturelle de l'utilisateur dans le funnel.",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "funnel"]
+        },
+        "count_users": {
+          "name": "count_users",
+          "description": "Nombre d'utilisateurs uniques ayant atteint cette étape du funnel à la date donnée. Un utilisateur est compté une seule fois par étape et par jour, même s'il effectue l'action plusieurs fois. Dédupliqué sur l'identifiant utilisateur.",
+          "meta": {},
+          "data_type": "INTEGER",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric"]
+        },
+        "conversion_rate": {
+          "name": "conversion_rate",
+          "description": "Taux de conversion de cette étape par rapport à l'étape précédente du funnel, exprimé en décimal (ex. : 0.15 = 15%). Pour l'étape 'visit', cette valeur est toujours 1.0 (100%). Calculé comme : count_users(étape N) / count_users(étape N-1). Arrondi à 4 décimales.",
+          "meta": {},
+          "data_type": "DECIMAL",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "conversion"]
+        }
+      },
+      "meta": {
+        "owner": "growth-ops",
+        "team": "data",
+        "sla": "daily",
+        "pii": false
+      },
+      "group": null,
+      "docs": {
+        "show": true,
+        "node_color": "#2196F3"
+      },
+      "patch_path": "growth_analytics://models/marts/schema.yml",
+      "build_path": null,
+      "deferred": false,
+      "unrendered_config": {
+        "materialized": "table",
+        "schema": "marts"
+      },
+      "created_at": 1717848000.0,
+      "relation_name": "`growth_analytics`.`marts`.`mart_funnel_daily`",
+      "raw_code": "WITH funnel_steps AS (\n  SELECT\n    event_date AS date,\n    step,\n    COUNT(DISTINCT user_id) AS count_users\n  FROM {{ ref('stg_tracking_events') }}\n  GROUP BY 1, 2\n)\nSELECT\n  date,\n  step,\n  count_users,\n  ROUND(count_users / LAG(count_users) OVER (PARTITION BY date ORDER BY step_order), 4) AS conversion_rate\nFROM funnel_steps",
+      "language": "sql",
+      "refs": [
+        {"name": "stg_tracking_events", "package": null, "version": null}
+      ],
+      "sources": [],
+      "metrics": [],
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.growth_analytics.stg_tracking_events"
+        ]
+      },
+      "compiled_path": "target/compiled/growth_analytics/models/marts/mart_funnel_daily.sql",
+      "contract": {
+        "enforced": false,
+        "alias_types": true,
+        "checksum": null
+      },
+      "access": "public",
+      "constraints": [],
+      "version": null,
+      "latest_version": null,
+      "deprecation_date": null
+    },
+    "model.growth_analytics.mart_revenue_monthly": {
+      "database": "growth_analytics",
+      "schema": "marts",
+      "name": "mart_revenue_monthly",
+      "resource_type": "model",
+      "package_name": "growth_analytics",
+      "path": "marts/mart_revenue_monthly.sql",
+      "original_file_path": "models/marts/mart_revenue_monthly.sql",
+      "unique_id": "model.growth_analytics.mart_revenue_monthly",
+      "fqn": ["growth_analytics", "marts", "mart_revenue_monthly"],
+      "alias": "mart_revenue_monthly",
+      "checksum": {
+        "name": "sha256",
+        "checksum": "c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4"
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "marts",
+        "database": "growth_analytics",
+        "tags": ["growth", "revenue", "monthly"],
+        "meta": {
+          "owner": "growth-ops",
+          "team": "data",
+          "sla": "daily",
+          "pii": false
+        },
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "persist_docs": {
+          "relation": true,
+          "columns": true
+        },
+        "full_refresh": null,
+        "on_schema_change": "append_new_columns",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": "#FF9800"
+        },
+        "contract": {
+          "enforced": false
+        }
+      },
+      "tags": ["growth", "revenue", "monthly"],
+      "description": "Analyse mensuelle du chiffre d'affaires de ScaleUp Corp ventilé par canal d'acquisition. Chaque ligne représente une combinaison unique de mois et de canal (organique, payant, referral, partenaire). Ce modèle est la source de vérité pour le suivi de la performance revenue par canal, l'optimisation de l'allocation budgétaire marketing et le calcul du CAC (coût d'acquisition client) par canal. Il inclut également le nombre de nouveaux clients acquis par canal et par mois, permettant de calculer le revenu moyen par nouveau client (ARPU). Alimenté quotidiennement à partir des tables de facturation et d'attribution marketing.",
+      "columns": {
+        "month": {
+          "name": "month",
+          "description": "Premier jour du mois concerné, au format DATE (YYYY-MM-DD). Représente le mois calendaire pour lequel les métriques de revenu sont agrégées. Fait partie de la clé composite avec la colonne 'channel'.",
+          "meta": {},
+          "data_type": "DATE",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "date"]
+        },
+        "channel": {
+          "name": "channel",
+          "description": "Canal d'acquisition marketing attribué au revenu généré. Quatre valeurs possibles : 'organic' (trafic naturel SEO, direct et social organique), 'paid' (campagnes publicitaires payantes : Google Ads, Facebook Ads, LinkedIn Ads), 'referral' (trafic provenant de recommandations et de liens entrants), 'partner' (revenu généré via le programme de partenariat et les revendeurs). L'attribution est basée sur le modèle first-touch.",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "channel"]
+        },
+        "revenue": {
+          "name": "revenue",
+          "description": "Chiffre d'affaires total en euros (€) généré par ce canal au cours du mois, hors taxes. Inclut les revenus récurrents (abonnements) et ponctuels (setup fees, services). Arrondi à deux décimales.",
+          "meta": {},
+          "data_type": "DECIMAL",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "revenue"]
+        },
+        "new_customers": {
+          "name": "new_customers",
+          "description": "Nombre de nouveaux clients ayant effectué leur premier achat ou souscrit leur premier abonnement payant au cours du mois, attribués à ce canal d'acquisition. Un client n'est compté qu'une seule fois, lors de son mois de première conversion.",
+          "meta": {},
+          "data_type": "INTEGER",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "customers"]
+        }
+      },
+      "meta": {
+        "owner": "growth-ops",
+        "team": "data",
+        "sla": "daily",
+        "pii": false
+      },
+      "group": null,
+      "docs": {
+        "show": true,
+        "node_color": "#FF9800"
+      },
+      "patch_path": "growth_analytics://models/marts/schema.yml",
+      "build_path": null,
+      "deferred": false,
+      "unrendered_config": {
+        "materialized": "table",
+        "schema": "marts"
+      },
+      "created_at": 1717848000.0,
+      "relation_name": "`growth_analytics`.`marts`.`mart_revenue_monthly`",
+      "raw_code": "SELECT\n  DATE_TRUNC(payment_date, MONTH) AS month,\n  attribution_channel AS channel,\n  SUM(amount_eur) AS revenue,\n  COUNT(DISTINCT CASE WHEN is_first_purchase THEN customer_id END) AS new_customers\nFROM {{ ref('stg_payments') }}\nLEFT JOIN {{ ref('stg_attribution') }} USING (customer_id)\nGROUP BY 1, 2",
+      "language": "sql",
+      "refs": [
+        {"name": "stg_payments", "package": null, "version": null},
+        {"name": "stg_attribution", "package": null, "version": null}
+      ],
+      "sources": [],
+      "metrics": [],
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.growth_analytics.stg_payments",
+          "model.growth_analytics.stg_attribution"
+        ]
+      },
+      "compiled_path": "target/compiled/growth_analytics/models/marts/mart_revenue_monthly.sql",
+      "contract": {
+        "enforced": false,
+        "alias_types": true,
+        "checksum": null
+      },
+      "access": "public",
+      "constraints": [],
+      "version": null,
+      "latest_version": null,
+      "deprecation_date": null
+    },
+    "model.growth_analytics.mart_cohort_retention": {
+      "database": "growth_analytics",
+      "schema": "marts",
+      "name": "mart_cohort_retention",
+      "resource_type": "model",
+      "package_name": "growth_analytics",
+      "path": "marts/mart_cohort_retention.sql",
+      "original_file_path": "models/marts/mart_cohort_retention.sql",
+      "unique_id": "model.growth_analytics.mart_cohort_retention",
+      "fqn": ["growth_analytics", "marts", "mart_cohort_retention"],
+      "alias": "mart_cohort_retention",
+      "checksum": {
+        "name": "sha256",
+        "checksum": "d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5"
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "marts",
+        "database": "growth_analytics",
+        "tags": ["growth", "cohort", "retention"],
+        "meta": {
+          "owner": "growth-ops",
+          "team": "data",
+          "sla": "daily",
+          "pii": false
+        },
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "persist_docs": {
+          "relation": true,
+          "columns": true
+        },
+        "full_refresh": null,
+        "on_schema_change": "append_new_columns",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": "#9C27B0"
+        },
+        "contract": {
+          "enforced": false
+        }
+      },
+      "tags": ["growth", "cohort", "retention"],
+      "description": "Analyse de la rétention par cohorte mensuelle des utilisateurs de ScaleUp Corp. Chaque ligne représente une combinaison unique de cohorte d'inscription (mois d'inscription) et de période écoulée (0 à 12 mois après l'inscription). Le modèle calcule le pourcentage d'utilisateurs de chaque cohorte qui sont encore actifs à chaque période, permettant de construire la classique « triangle de rétention ». Ce modèle est essentiel pour évaluer la qualité de l'acquisition par cohorte, détecter les dégradations de rétention au fil du temps, et alimenter les projections de LTV (Lifetime Value). La période 0 correspond au mois d'inscription (rétention = 100%).",
+      "columns": {
+        "cohort_month": {
+          "name": "cohort_month",
+          "description": "Mois d'inscription de la cohorte, représenté par le premier jour du mois au format DATE (YYYY-MM-DD). Tous les utilisateurs qui se sont inscrits au cours de ce mois calendaire sont regroupés dans cette cohorte. Fait partie de la clé composite avec 'period_number'.",
+          "meta": {},
+          "data_type": "DATE",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "date", "cohort"]
+        },
+        "period_number": {
+          "name": "period_number",
+          "description": "Numéro de la période écoulée depuis le mois d'inscription de la cohorte. Valeur entière de 0 à 12. La période 0 représente le mois d'inscription lui-même (rétention toujours à 100%). La période 1 représente le mois suivant l'inscription, etc. Permet de construire l'axe horizontal du triangle de rétention.",
+          "meta": {},
+          "data_type": "INTEGER",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "period"]
+        },
+        "retention_pct": {
+          "name": "retention_pct",
+          "description": "Pourcentage d'utilisateurs de la cohorte qui sont encore actifs (au moins une connexion ou une action significative) à cette période, exprimé en décimal (ex. : 0.72 = 72%). Calculé comme : nombre d'utilisateurs actifs à la période N / nombre total d'utilisateurs de la cohorte à la période 0. Arrondi à 4 décimales. La valeur à period_number = 0 est toujours 1.0000.",
+          "meta": {},
+          "data_type": "DECIMAL",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "retention"]
+        }
+      },
+      "meta": {
+        "owner": "growth-ops",
+        "team": "data",
+        "sla": "daily",
+        "pii": false
+      },
+      "group": null,
+      "docs": {
+        "show": true,
+        "node_color": "#9C27B0"
+      },
+      "patch_path": "growth_analytics://models/marts/schema.yml",
+      "build_path": null,
+      "deferred": false,
+      "unrendered_config": {
+        "materialized": "table",
+        "schema": "marts"
+      },
+      "created_at": 1717848000.0,
+      "relation_name": "`growth_analytics`.`marts`.`mart_cohort_retention`",
+      "raw_code": "WITH cohorts AS (\n  SELECT\n    DATE_TRUNC(signup_date, MONTH) AS cohort_month,\n    user_id\n  FROM {{ ref('stg_users') }}\n),\nactivity AS (\n  SELECT\n    user_id,\n    DATE_TRUNC(activity_date, MONTH) AS activity_month\n  FROM {{ ref('stg_user_activity') }}\n  GROUP BY 1, 2\n)\nSELECT\n  c.cohort_month,\n  DATE_DIFF(a.activity_month, c.cohort_month, MONTH) AS period_number,\n  ROUND(COUNT(DISTINCT a.user_id) / COUNT(DISTINCT c.user_id), 4) AS retention_pct\nFROM cohorts c\nLEFT JOIN activity a ON c.user_id = a.user_id\nWHERE DATE_DIFF(a.activity_month, c.cohort_month, MONTH) BETWEEN 0 AND 12\nGROUP BY 1, 2",
+      "language": "sql",
+      "refs": [
+        {"name": "stg_users", "package": null, "version": null},
+        {"name": "stg_user_activity", "package": null, "version": null}
+      ],
+      "sources": [],
+      "metrics": [],
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.growth_analytics.stg_users",
+          "model.growth_analytics.stg_user_activity"
+        ]
+      },
+      "compiled_path": "target/compiled/growth_analytics/models/marts/mart_cohort_retention.sql",
+      "contract": {
+        "enforced": false,
+        "alias_types": true,
+        "checksum": null
+      },
+      "access": "public",
+      "constraints": [],
+      "version": null,
+      "latest_version": null,
+      "deprecation_date": null
+    },
+    "model.growth_analytics.mart_growth_accounting": {
+      "database": "growth_analytics",
+      "schema": "marts",
+      "name": "mart_growth_accounting",
+      "resource_type": "model",
+      "package_name": "growth_analytics",
+      "path": "marts/mart_growth_accounting.sql",
+      "original_file_path": "models/marts/mart_growth_accounting.sql",
+      "unique_id": "model.growth_analytics.mart_growth_accounting",
+      "fqn": ["growth_analytics", "marts", "mart_growth_accounting"],
+      "alias": "mart_growth_accounting",
+      "checksum": {
+        "name": "sha256",
+        "checksum": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6"
+      },
+      "config": {
+        "enabled": true,
+        "alias": null,
+        "schema": "marts",
+        "database": "growth_analytics",
+        "tags": ["growth", "accounting", "monthly"],
+        "meta": {
+          "owner": "growth-ops",
+          "team": "data",
+          "sla": "daily",
+          "pii": false
+        },
+        "group": null,
+        "materialized": "table",
+        "incremental_strategy": null,
+        "persist_docs": {
+          "relation": true,
+          "columns": true
+        },
+        "full_refresh": null,
+        "on_schema_change": "append_new_columns",
+        "grants": {},
+        "packages": [],
+        "docs": {
+          "show": true,
+          "node_color": "#F44336"
+        },
+        "contract": {
+          "enforced": false
+        }
+      },
+      "tags": ["growth", "accounting", "monthly"],
+      "description": "Comptabilité de croissance (Growth Accounting) mensuelle de ScaleUp Corp, basée sur le framework popularisé par Social Capital. Ce modèle décompose la base utilisateurs active de chaque mois en quatre catégories mutuellement exclusives : 'new' (nouveaux utilisateurs inscrits ce mois-ci), 'retained' (utilisateurs actifs le mois précédent ET le mois en cours), 'resurrected' (utilisateurs inactifs le mois précédent mais actifs ce mois-ci, c'est-à-dire des utilisateurs réactivés), et 'churned' (utilisateurs actifs le mois précédent mais inactifs ce mois-ci). Ce modèle est fondamental pour comprendre la dynamique de croissance nette : croissance = new + resurrected - churned. Il permet de diagnostiquer si la croissance est saine (tirée par les nouveaux et la rétention) ou fragile (dépendante de la résurrection avec un churn élevé).",
+      "columns": {
+        "month": {
+          "name": "month",
+          "description": "Premier jour du mois concerné, au format DATE (YYYY-MM-DD). Représente le mois calendaire pour lequel la décomposition de la base utilisateurs est calculée. Fait partie de la clé composite avec la colonne 'status'.",
+          "meta": {},
+          "data_type": "DATE",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "date"]
+        },
+        "status": {
+          "name": "status",
+          "description": "Catégorie de l'utilisateur dans le framework de Growth Accounting pour le mois donné. Quatre valeurs mutuellement exclusives : 'new' (première activité ce mois-ci, inscrit ce mois-ci), 'retained' (actif le mois M-1 ET le mois M), 'resurrected' (inactif le mois M-1 mais actif le mois M, avec au moins une activité antérieure), 'churned' (actif le mois M-1 mais inactif le mois M). Chaque utilisateur est classé dans exactement une catégorie par mois.",
+          "meta": {},
+          "data_type": "VARCHAR",
+          "constraints": [],
+          "quote": null,
+          "tags": ["dimension", "status"]
+        },
+        "n_users": {
+          "name": "n_users",
+          "description": "Nombre d'utilisateurs uniques dans cette catégorie pour le mois donné. Pour les catégories 'new', 'retained' et 'resurrected', il s'agit d'utilisateurs actifs (avec au moins une action significative dans le mois). Pour la catégorie 'churned', il s'agit d'utilisateurs qui étaient actifs le mois précédent mais qui n'ont eu aucune activité ce mois-ci.",
+          "meta": {},
+          "data_type": "INTEGER",
+          "constraints": [],
+          "quote": null,
+          "tags": ["metric", "users"]
+        }
+      },
+      "meta": {
+        "owner": "growth-ops",
+        "team": "data",
+        "sla": "daily",
+        "pii": false
+      },
+      "group": null,
+      "docs": {
+        "show": true,
+        "node_color": "#F44336"
+      },
+      "patch_path": "growth_analytics://models/marts/schema.yml",
+      "build_path": null,
+      "deferred": false,
+      "unrendered_config": {
+        "materialized": "table",
+        "schema": "marts"
+      },
+      "created_at": 1717848000.0,
+      "relation_name": "`growth_analytics`.`marts`.`mart_growth_accounting`",
+      "raw_code": "WITH monthly_active AS (\n  SELECT\n    user_id,\n    DATE_TRUNC(activity_date, MONTH) AS month\n  FROM {{ ref('stg_user_activity') }}\n  GROUP BY 1, 2\n),\nclassified AS (\n  SELECT\n    curr.month,\n    curr.user_id,\n    CASE\n      WHEN prev.user_id IS NULL AND first_activity.month = curr.month THEN 'new'\n      WHEN prev.user_id IS NOT NULL THEN 'retained'\n      WHEN prev.user_id IS NULL AND first_activity.month < curr.month THEN 'resurrected'\n    END AS status\n  FROM monthly_active curr\n  LEFT JOIN monthly_active prev\n    ON curr.user_id = prev.user_id\n    AND prev.month = DATE_SUB(curr.month, INTERVAL 1 MONTH)\n  LEFT JOIN (\n    SELECT user_id, MIN(month) AS month FROM monthly_active GROUP BY 1\n  ) first_activity ON curr.user_id = first_activity.user_id\n)\nSELECT\n  month,\n  status,\n  COUNT(DISTINCT user_id) AS n_users\nFROM classified\nWHERE status IS NOT NULL\nGROUP BY 1, 2\n\nUNION ALL\n\n-- Churned users\nSELECT\n  DATE_ADD(prev.month, INTERVAL 1 MONTH) AS month,\n  'churned' AS status,\n  COUNT(DISTINCT prev.user_id) AS n_users\nFROM monthly_active prev\nLEFT JOIN monthly_active curr\n  ON prev.user_id = curr.user_id\n  AND curr.month = DATE_ADD(prev.month, INTERVAL 1 MONTH)\nWHERE curr.user_id IS NULL\nGROUP BY 1, 2",
+      "language": "sql",
+      "refs": [
+        {"name": "stg_user_activity", "package": null, "version": null}
+      ],
+      "sources": [],
+      "metrics": [],
+      "depends_on": {
+        "macros": [],
+        "nodes": [
+          "model.growth_analytics.stg_user_activity"
+        ]
+      },
+      "compiled_path": "target/compiled/growth_analytics/models/marts/mart_growth_accounting.sql",
+      "contract": {
+        "enforced": false,
+        "alias_types": true,
+        "checksum": null
+      },
+      "access": "public",
+      "constraints": [],
+      "version": null,
+      "latest_version": null,
+      "deprecation_date": null
+    }
+  },
+  "sources": {},
+  "macros": {},
+  "docs": {},
+  "exposures": {},
+  "metrics": {},
+  "groups": {},
+  "selectors": {},
+  "disabled": [],
+  "parent_map": {
+    "model.growth_analytics.mart_partner_360": [
+      "model.growth_analytics.stg_partners",
+      "model.growth_analytics.stg_orders_agg"
+    ],
+    "model.growth_analytics.mart_funnel_daily": [
+      "model.growth_analytics.stg_tracking_events"
+    ],
+    "model.growth_analytics.mart_revenue_monthly": [
+      "model.growth_analytics.stg_payments",
+      "model.growth_analytics.stg_attribution"
+    ],
+    "model.growth_analytics.mart_cohort_retention": [
+      "model.growth_analytics.stg_users",
+      "model.growth_analytics.stg_user_activity"
+    ],
+    "model.growth_analytics.mart_growth_accounting": [
+      "model.growth_analytics.stg_user_activity"
+    ]
+  },
+  "child_map": {
+    "model.growth_analytics.stg_partners": [
+      "model.growth_analytics.mart_partner_360"
+    ],
+    "model.growth_analytics.stg_orders_agg": [
+      "model.growth_analytics.mart_partner_360"
+    ],
+    "model.growth_analytics.stg_tracking_events": [
+      "model.growth_analytics.mart_funnel_daily"
+    ],
+    "model.growth_analytics.stg_payments": [
+      "model.growth_analytics.mart_revenue_monthly"
+    ],
+    "model.growth_analytics.stg_attribution": [
+      "model.growth_analytics.mart_revenue_monthly"
+    ],
+    "model.growth_analytics.stg_users": [
+      "model.growth_analytics.mart_cohort_retention"
+    ],
+    "model.growth_analytics.stg_user_activity": [
+      "model.growth_analytics.mart_cohort_retention",
+      "model.growth_analytics.mart_growth_accounting"
+    ]
+  },
+  "group_map": {},
+  "saved_queries": {},
+  "semantic_models": {},
+  "unit_tests": {}
+}
