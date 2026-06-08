@@ -15,6 +15,8 @@ Il agit comme un point d'accès unifié pour une équipe Growth, capable de :
 
 > **⚠️ Avertissement :** Les données utilisées dans ce projet (Playbooks, tickets, utilisateurs, KPIs) sont 100% fictionnelles et générées à des fins de démonstration (`ScaleUp Corp`).
 
+<img width="1904" height="938" alt="Capture d&#39;écran 2026-06-08 195103" src="https://github.com/user-attachments/assets/5dc55dcc-4c0c-427b-9e6a-98625d8a9915" />
+
 ---
 
 ## ✨ Fonctionnalités clés
