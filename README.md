@@ -1,7 +1,5 @@
 <div align="center">
-  <h1>⚡ Growth OS — RAG Knowledge Base & Text-to-SQL</h1>
-  <p><i>Assistant IA hybride pour les équipes Growth & Ops (Projet Portfolio #15)</i></p>
-</div>
+  <h1>Growth OS — RAG Knowledge Base & Text-to-SQL</h1>
 
 ---
 
