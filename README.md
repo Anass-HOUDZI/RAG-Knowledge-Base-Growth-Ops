@@ -1,9 +1,4 @@
-<div align="center">
   <h1>Growth OS — RAG Knowledge Base & Text-to-SQL</h1>
-
----
-
-## 📖 À propos du projet
 
 **Growth OS** est une application d'IA appliquée démontrant la convergence entre l'architecture RAG (Retrieval-Augmented Generation) et l'analyse de données relationnelles structurées (Data Warehouse). Ce projet clôture le cluster **"IA Appliquée & Agents"** du portfolio AI Growth Engineer.
 
