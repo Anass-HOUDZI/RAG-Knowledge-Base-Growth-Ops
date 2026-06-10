@@ -1,12 +1,10 @@
-  <h1>Growth OS — RAG Knowledge Base & Text-to-SQL</h1>
+<h1>Growth OS — RAG Knowledge Base & Text-to-SQL</h1>
 
 **Growth OS** est une application d'IA appliquée démontrant la convergence entre l'architecture RAG (Retrieval-Augmented Generation) et l'analyse de données relationnelles structurées (Data Warehouse). Ce projet clôture le cluster **"IA Appliquée & Agents"** du portfolio AI Growth Engineer.
 
 Il agit comme un point d'accès unifié pour une équipe Growth, capable de :
 1. Répondre aux questions opérationnelles en puisant dans la documentation interne.
 2. Extraire et analyser des KPIs directement depuis la base de données via la génération SQL autonome.
-
-> **⚠️ Avertissement :** Les données utilisées dans ce projet (Playbooks, tickets, utilisateurs, KPIs) sont 100% fictionnelles et générées à des fins de démonstration (`ScaleUp Corp`).
 
 <img width="1904" height="938" alt="Capture d&#39;écran 2026-06-08 195103" src="https://github.com/user-attachments/assets/5dc55dcc-4c0c-427b-9e6a-98625d8a9915" />
 
@@ -113,10 +111,3 @@ streamlit run app/streamlit_app.py
 **Route 2 : Base Analytique (SQL)**
 - *"Donne moi le MRR total groupé par canal d'acquisition."*
 - *"Quelle est la rétention de la cohorte 2025-01 après 2 mois ?"*
-
----
-
-## 👨‍💻 Auteur
-
-**Anass HOUDZI** — AI Growth Engineer
-> Ce projet est développé dans le cadre de mon Portfolio professionnel. Il illustre la maîtrise de l'orchestration LLM, du design RAG hybride et de la manipulation de la donnée structurée/non-structurée.
